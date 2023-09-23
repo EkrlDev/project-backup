@@ -5,6 +5,7 @@ const getData = async () => {
 };
 getData();
 
+//Query Selectors
 const main = document.querySelector('main');
 const collageContainer = document.querySelector('#collage-container');
 const toggleIcon = document.querySelector('#toggle-icon');
@@ -31,6 +32,7 @@ toggleIcon.addEventListener('click', () =>{
     })
 })
 
+//Search Functions
 const searchHandler = () => {
     const collectionSection = document.querySelector('#collection-container');
     if(collageContainer.className === 'collage-container') { 
@@ -38,9 +40,7 @@ const searchHandler = () => {
     } else if(collectionSection) {
         collectionSection.remove();
     }
-    
     const searchText = searchInput.value.toLowerCase()
-
     const newSection = document.createElement('section')
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
@@ -69,9 +69,14 @@ const searchHandler = () => {
             }
         })
         })
-
     } 
+const clearSearchInput = () => {
+    console.log('clearSearchInput')
+    searchInput.value = '';
+    searchHandler();
+}
 
+//Navigating Functon
 const clickHandler = (e) => {
     collageContainer.className = 'collage-container-hidden';
     let collection = e.target.id;
@@ -97,6 +102,8 @@ const clickHandler = (e) => {
     })
 }
 
+//Event Listeners
+searchInput.addEventListener('focus', clearSearchInput)
 searchInput.addEventListener('input', searchHandler)
 searchButton.addEventListener("click", searchHandler)
 peopleBtn.addEventListener('click', clickHandler );
