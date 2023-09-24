@@ -93,36 +93,42 @@ const addToFavorites = (e) => {
             if (name === item.name) {
                 if (myFavorites[key]) {
                     // Category key already exists in myFavorites, so append to the array
-                    myFavorites[key].push(item.name);
+                    myFavorites[key].push({favName:item.name, favSrc:item.src});
                 } else {
                     // Category key does not exist in myFavorites, create a new array
-                    myFavorites[key] = [item.name];
+                    myFavorites[key] = [{favName:item.name, favSrc:item.src}];
                 }
                 isAdded = true;
             }
         });
     })
+    console.log(myFavorites)
 }
 
 const deleteFromFavorites = (e) => {
     const name = e.target.parentElement.lastChild.textContent;
 
     Object.keys(myFavorites).forEach(key => {
-        if (myFavorites[key] && myFavorites[key].includes(name)) {
-            // Use Array.filter to create a new array without the specified name
-            myFavorites[key] = myFavorites[key].filter(item => item !== name);
-            
-            // If the resulting array is empty, you can delete the category key
-            if (myFavorites[key].length === 0) {
-                delete myFavorites[key];
-            }
-        }
+        myFavorites[key].forEach(item => {
+            if(myFavorites[key] && item.favName === name) {
+                myFavorites[key] = myFavorites[key].filter(item => item.favName !== name);
+                if (myFavorites[key].length === 0) {
+                    delete myFavorites[key];
+                }
+    }})
     });
-}
-
-const favoritesRenderHandler = () => {
     console.log(myFavorites)
 }
+
+// if (myFavorites[key] && myFavorites[key].includes(name)) {
+//     // Use Array.filter to create a new array without the specified name
+//     myFavorites[key] = myFavorites[key].filter(item => item !== name);
+    
+//     // If the resulting array is empty, you can delete the category key
+//     if (myFavorites[key].length === 0) {
+//         delete myFavorites[key];
+//     }
+// }
 
 
 //Navigating Functon
@@ -159,6 +165,42 @@ const collectionRenderHandler = (e) => {
         newSection.appendChild(newDiv);
         main.appendChild(newSection);
     })
+}
+
+const favoritesRenderHandler = () => {
+    collageContainer.className = 'collage-container-hidden';
+    const collectionSection = document.querySelector('#collection-container');
+    if(collectionSection) {
+        collectionSection.remove();
+    }
+    const newSection = document.createElement('section')
+    newSection.id = 'collection-container';
+    newSection.className = 'collection-container';
+    Object.keys(myFavorites).forEach(key => {})
+    data[collection].map(item => {
+        const newDiv = document.createElement('div');
+        newDiv.className = 'card';
+        const newImg = document.createElement('img');
+        newImg.src = item.src;
+        newDiv.appendChild(newImg);
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Add';
+        addButton.className = 'addToFav-icon';
+        addButton.addEventListener('click', addToFavorites)
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'deleteFromFav-icon';
+        deleteButton.addEventListener('click', deleteFromFavorites)
+        newDiv.appendChild(addButton);
+        newDiv.appendChild(deleteButton);
+        const newP = document.createElement('p');
+        const newText = document.createTextNode(item.name)
+        newP.appendChild(newText);
+        newDiv.appendChild(newP);
+        newSection.appendChild(newDiv);
+        main.appendChild(newSection);
+    })
+    console.log(myFavorites)
 }
 
 //Event Listeners

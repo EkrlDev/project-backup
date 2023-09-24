@@ -156,6 +156,8 @@ li{
     height: 90%;
     object-fit:cover;
     border: none;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
 }
 
 .addToFav-icon {
