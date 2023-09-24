@@ -101,8 +101,8 @@ const addToFavorites = (e) => {
             }
         });
     })
-    //collectionRenderHandler(e)
-    console.log(e.target.parentNode.parentNode.title)
+    const collection = e.target.parentNode.parentNode.title
+    collectionRender(collection)
 }
 
 const deleteFromFavorites = (e) => {
@@ -118,18 +118,11 @@ const deleteFromFavorites = (e) => {
     }})
     });
     favoritesRenderHandler();
-    console.log(myFavorites)
 }
 
 
 //Render Functon
 const collectionRender = (collection) => {
-
-}
-
-//Navigating Functons
-const collectionRenderHandler = (e) => {
-    let collection = e.target.id;
     collageContainer.className = 'collage-container-hidden';
     const collectionSection = document.querySelector('#collection-container');
     if(collectionSection) {
@@ -150,11 +143,8 @@ const collectionRenderHandler = (e) => {
         favIcon.addEventListener('click', addToFavorites)
         Object.keys(myFavorites).forEach(key => {
             myFavorites[key].forEach(item => {
-                
                 if(item.favName === collectionItem.name){
                     favIcon.className = 'fas fa-solid fa-heart inFav-icon';
-                    console.log(item.favName)
-                    console.log('NAME:',collectionItem.name)
                     favIcon.removeEventListener('click',addToFavorites)
                 } 
             })});
@@ -166,6 +156,12 @@ const collectionRenderHandler = (e) => {
         newSection.appendChild(newDiv);
     })
     main.appendChild(newSection);
+}
+
+//Navigating Functons
+const collectionRenderHandler = (e) => {
+    let collection = e.target.id;
+    collectionRender(collection)
 }
 
 const favoritesRenderHandler = () => {
