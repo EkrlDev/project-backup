@@ -5,6 +5,8 @@ const getData = async () => {
 };
 getData();
 
+let myFavorites = {};
+
 //Query Selectors
 const main = document.querySelector('main');
 const collageContainer = document.querySelector('#collage-container');
@@ -14,9 +16,11 @@ const peopleBtn = document.querySelector('#people');
 const speciesBtn = document.querySelector('#species');
 const starshipsBtn = document.querySelector('#starships');
 const vehiclesBtn = document.querySelector('#vehicles');
+const favoritesBtn = document.querySelector('#favorites');
 const bar = document.querySelectorAll("span")
 const searchButton = document.getElementById('search-button');
 const searchInput = document.getElementById('search-input');
+
 
 homeIcon.addEventListener("click", () =>{
     console.log("homeIcon clicked");
@@ -76,8 +80,53 @@ const clearSearchInput = () => {
     searchHandler();
 }
 
+//Favorites Functions
+
+const addToFavorites = (e) => {
+    const name = e.target.parentElement.lastChild.textContent;
+
+    // Check if the name is already in myFavorites
+    let isAdded = false;
+
+    Object.keys(data).forEach(key => {
+        data[key].forEach(item => {
+            if (name === item.name) {
+                if (myFavorites[key]) {
+                    // Category key already exists in myFavorites, so append to the array
+                    myFavorites[key].push(item.name);
+                } else {
+                    // Category key does not exist in myFavorites, create a new array
+                    myFavorites[key] = [item.name];
+                }
+                isAdded = true;
+            }
+        });
+    })
+}
+
+const deleteFromFavorites = (e) => {
+    const name = e.target.parentElement.lastChild.textContent;
+
+    Object.keys(myFavorites).forEach(key => {
+        if (myFavorites[key] && myFavorites[key].includes(name)) {
+            // Use Array.filter to create a new array without the specified name
+            myFavorites[key] = myFavorites[key].filter(item => item !== name);
+            
+            // If the resulting array is empty, you can delete the category key
+            if (myFavorites[key].length === 0) {
+                delete myFavorites[key];
+            }
+        }
+    });
+}
+
+const favoritesRenderHandler = () => {
+    console.log(myFavorites)
+}
+
+
 //Navigating Functon
-const clickHandler = (e) => {
+const collectionRenderHandler = (e) => {
     collageContainer.className = 'collage-container-hidden';
     let collection = e.target.id;
     const collectionSection = document.querySelector('#collection-container');
@@ -93,6 +142,16 @@ const clickHandler = (e) => {
         const newImg = document.createElement('img');
         newImg.src = item.src;
         newDiv.appendChild(newImg);
+        const addButton = document.createElement('button');
+        addButton.textContent = 'Add';
+        addButton.className = 'addToFav-icon';
+        addButton.addEventListener('click', addToFavorites)
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'Delete';
+        deleteButton.className = 'deleteFromFav-icon';
+        deleteButton.addEventListener('click', deleteFromFavorites)
+        newDiv.appendChild(addButton);
+        newDiv.appendChild(deleteButton);
         const newP = document.createElement('p');
         const newText = document.createTextNode(item.name)
         newP.appendChild(newText);
@@ -106,10 +165,11 @@ const clickHandler = (e) => {
 searchInput.addEventListener('focus', clearSearchInput)
 searchInput.addEventListener('input', searchHandler)
 searchButton.addEventListener("click", searchHandler)
-peopleBtn.addEventListener('click', clickHandler );
-speciesBtn.addEventListener('click', clickHandler );
-starshipsBtn.addEventListener('click', clickHandler );
-vehiclesBtn.addEventListener('click', clickHandler );
+peopleBtn.addEventListener('click', collectionRenderHandler );
+speciesBtn.addEventListener('click', collectionRenderHandler );
+starshipsBtn.addEventListener('click', collectionRenderHandler );
+vehiclesBtn.addEventListener('click', collectionRenderHandler );
+favoritesBtn.addEventListener('click', favoritesRenderHandler );
 
 
 
