@@ -3,6 +3,7 @@
     box-sizing: border-box;
     margin:0px;
     padding: 0px;
+   /* border: 1px solid #fff; */
     
 }
 
@@ -13,6 +14,7 @@ html, body {
 
 body{
     background-image: url("https://wallpapercave.com/wp/pEeUsp1.jpg");
+    
 }
 
 header {
@@ -20,14 +22,27 @@ header {
     display:flex;
     justify-content: space-between;
 }
-
 main {
-    height: 70%;
+    min-height: 70%;
 }
-
 footer {
     height: 10%;
     color: #d6d6d6;
+}
+footer p {
+    margin: 3px;
+    text-align: center;
+    font-family: Roboto;
+}
+footer p:nth-last-of-type(1){
+    font-size: small;
+    margin-top: 6px;
+}
+footer span{
+    color:#ffe81f
+}
+footer a {
+    color:#ffe81f;
 }
 .nav-container {
     margin-left: 5vw;
@@ -98,10 +113,13 @@ li{
 }
 
 .logo-container p {
-    height: 30%;
     display:block;
     color: #fff;
     font-size: 100%;
+    font-family: Roboto;
+    letter-spacing: 0.25em;
+    text-align: center;
+    margin-top: 2px;
 }
 
 .collage-container {
