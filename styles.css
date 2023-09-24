@@ -160,26 +160,20 @@ li{
     border-top-left-radius: 5px;
 }
 
-.addToFav-icon {
+.icon {
    position:absolute;
    top:10px;
    right:10px;
    cursor: pointer; 
-   color: #ffe81f;
+   color: #fff;
    font-size: 25px;
 }
-.inFav-icon {
-    position:absolute;
-    top:10px;
-    right:10px;
+.inFav {
     color: #ffe81f;
-    font-size: 20px; 
+    font-size: 20px;
+    cursor: default; 
 }
-.deleteFromFav-icon {
-   position:absolute;
-   top:30px;
-   right:10px;
-   cursor: pointer;
+.deleteFav {
    color: #ffe81f;
    font-size: 20px;
 }

@@ -101,7 +101,7 @@ const addToFavorites = (e) => {
             }
         });
     })
-    const collection = e.target.parentNode.parentNode.title
+    const collection = e.target.parentNode.parentNode.dataset.key
     collectionRender(collection)
 }
 
@@ -131,7 +131,7 @@ const collectionRender = (collection) => {
     const newSection = document.createElement('section')
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
-    newSection.setAttribute('title', collection)
+    newSection.setAttribute('data-key', collection)
     data[collection].map(collectionItem => {
         const newDiv = document.createElement('div');
         newDiv.className = 'card';
@@ -139,13 +139,15 @@ const collectionRender = (collection) => {
         newImg.src = collectionItem.src;
         newDiv.appendChild(newImg);
         const favIcon = document.createElement('i');
-        favIcon.className = 'fas fa-solid fa-check addToFav-icon';
+        favIcon.className = 'fas fa-solid fa-check icon';
         favIcon.addEventListener('click', addToFavorites)
+        favIcon.title = 'Add to Favorites';
         Object.keys(myFavorites).forEach(key => {
             myFavorites[key].forEach(item => {
                 if(item.favName === collectionItem.name){
-                    favIcon.className = 'fas fa-solid fa-heart inFav-icon';
+                    favIcon.className = 'fas fa-solid fa-heart icon inFav';
                     favIcon.removeEventListener('click',addToFavorites)
+                    favIcon.title = '';
                 } 
             })});
         newDiv.appendChild(favIcon);
@@ -175,21 +177,16 @@ const favoritesRenderHandler = () => {
     newSection.className = 'collection-container';
     Object.keys(myFavorites).forEach(key => {
         myFavorites[key].forEach(item => {
-            const newDiv = document.createElement('div');
+        const newDiv = document.createElement('div');
         newDiv.className = 'card';
         const newImg = document.createElement('img');
         newImg.src = item.favSrc;
         newDiv.appendChild(newImg);
-        const addButton = document.createElement('button');
-        addButton.textContent = 'Add';
-        addButton.className = 'addToFav-icon';
-        addButton.addEventListener('click', addToFavorites)
-        const deleteButton = document.createElement('button');
-        deleteButton.textContent = 'Delete';
-        deleteButton.className = 'deleteFromFav-icon';
-        deleteButton.addEventListener('click', deleteFromFavorites)
-        newDiv.appendChild(addButton);
-        newDiv.appendChild(deleteButton);
+        const removeIcon = document.createElement('i');
+        removeIcon.className = 'fas fa-solid fa-trash icon deleteFav';
+        removeIcon.addEventListener('click', deleteFromFavorites)
+        removeIcon.title = 'Remove';
+        newDiv.appendChild(removeIcon);
         const newP = document.createElement('p');
         const newText = document.createTextNode(item.favName)
         newP.appendChild(newText);
