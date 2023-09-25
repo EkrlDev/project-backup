@@ -16,6 +16,8 @@ body{
 }
 
 header {
+    margin-left: auto;
+    margin-right: auto;
     height: 30%;
     justify-content: space-between;
     border: 1px solid #fff
@@ -102,17 +104,18 @@ header {
 }
 
 ul{
-    align-items: center;
     display: flex;
+    justify-content: center;
     align-items: center;
     border:1px solid red;
 }
 
 li{
-    color:#fff;
-    display: inline-block;
-    margin:2px;
+    color:#ffe81f;
+    margin:15px;
     cursor: pointer;
+    font-family: Roboto;
+    font-size: large;
 }
 .toggle-container {
     margin-left: 5vw;
@@ -154,9 +157,15 @@ li{
 }
 
 main {
+    margin-left: auto;
+    margin-right: auto;
     min-height: 70%;
+    width: 100vw;
+    border: #d6d6d6 1px solid;
 }
 footer {
+    margin-left: auto;
+    margin-right: auto;
     height: 10%;
     color: #d6d6d6;
 }
@@ -175,8 +184,6 @@ footer span{
 footer a {
     color:#ffe81f;
 }
-
-
 
 .collage-container {
     max-width: 100%; 
@@ -202,7 +209,7 @@ footer a {
 
 .collection-container{
     max-width: 100%; 
-    width: 85%;
+    width: 90%;
     margin: auto;
     display: flex;
     flex-wrap: wrap;
@@ -220,8 +227,7 @@ footer a {
     background-color: #fff;
     border: none;
     border-radius: 5px;
-    position: relative
-    
+    position: relative 
 }
 
 .card img{
