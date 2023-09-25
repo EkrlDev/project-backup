@@ -18,7 +18,6 @@ const starshipsBtn = document.querySelector('#starships');
 const vehiclesBtn = document.querySelector('#vehicles');
 const favoritesBtn = document.querySelector('#favorites');
 const bar = document.querySelectorAll("span")
-const searchButton = document.getElementById('search-button');
 const searchInput = document.getElementById('search-input');
 
 
@@ -29,12 +28,12 @@ homeIcon.addEventListener("click", () =>{
     collectionSection.className = "collection-container-hidden";
 })
 
-toggleIcon.addEventListener('click', () =>{
-    console.log('clicked',);
-    bar.forEach((e) => {
-        e.className = 'toggled-icon';
-    })
-})
+// toggleIcon.addEventListener('click', () =>{
+//     console.log('clicked',);
+//     bar.forEach((e) => {
+//         e.className = 'toggled-icon';
+//     })
+// })
 
 //Search Functions
 const searchHandler = () => {
@@ -75,7 +74,6 @@ const searchHandler = () => {
         })
     } 
 const clearSearchInput = () => {
-    console.log('clearSearchInput')
     searchInput.value = '';
     searchHandler();
 }
@@ -201,7 +199,6 @@ const favoritesRenderHandler = () => {
 //Event Listeners
 searchInput.addEventListener('focus', clearSearchInput)
 searchInput.addEventListener('input', searchHandler)
-searchButton.addEventListener("click", searchHandler)
 peopleBtn.addEventListener('click', collectionRenderHandler );
 speciesBtn.addEventListener('click', collectionRenderHandler );
 starshipsBtn.addEventListener('click', collectionRenderHandler );

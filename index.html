@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://kit.fontawesome.com/9ef4db385e.js" crossorigin="anonymous"></script>
-    <script defer src="https://friconix.com/cdn/friconix.js"> </script>
 </head>
 <body>
     <header>
@@ -22,8 +21,12 @@
                 <p class="logo-title">DIGITAL ARCHIVE</p> 
             </div>
             <div class="search-container">
-                <input type="text" id="search-input">
-                <button id="search-button">=O=</button>
+                <div class="search-field">
+                    <input type="text" id="search-input" class="search-input" placeholder="Search">
+                    <span class="material-icons">
+                        search
+                    </span>
+                </div>
             </div>
         </div>
         <div class="container2">
@@ -35,7 +38,7 @@
                 <li id="favorites">Favorites</li>
             </ul>
         </div>
-        <!--<div class="nav-container">
+        <!--<div class="toggle-container">
             <div class="toggle-icon" id="toggle-icon">
                 <span class="bar"></span>
                 <span class="bar"></span>
