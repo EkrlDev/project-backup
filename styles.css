@@ -22,23 +22,13 @@ header {
     margin-left: auto;
     margin-right: auto;
     justify-content: space-between;
-    border: 1px solid #fff
-}
-
-.container1{
-    display: flex;
-    width: 100vw;
-    border: 1px solid yellow;
-    justify-content: space-between;
-}
-
-.home-icon {
-    cursor: pointer;
-    margin-left: 40px;
+    border-bottom-color: 1px solid #fff;
+    position: relative;
 }
 
 .logo-img {
     height:10vh;
+    margin-top: 5vh;
 
 }
 
@@ -52,13 +42,26 @@ header {
     text-align: center;
 }
 
+.container1{
+    display: flex;
+    width: 100vw;
+    border: 1px solid yellow;
+    justify-content: space-between;
+    position:absolute;
+    margin-top: 10vh;
+}
+
+.home-icon {
+    cursor: pointer;
+    margin-left: 18vw;
+}
+
 .search-container {
     border:1px solid fuchsia;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 40px;
-    
+    margin-right: 40px;   
 }
 
 .search-field {
@@ -68,7 +71,6 @@ header {
     display: flex;
     align-items: center;
     width: 20vw;
-
 }
 
 .search-input {
@@ -99,7 +101,7 @@ ul{
 
 li{
     color:#ffe81f;
-    margin:15px;
+    margin:5px 15px;
     cursor: pointer;
     font-family: Roboto;
     font-size: large;
