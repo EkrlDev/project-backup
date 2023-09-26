@@ -56,6 +56,45 @@ header {
     margin-left: 18vw;
 }
 
+.toggle-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    display:none; 
+    border: 1px solid #fff;
+}
+
+.toggle-icon {
+	width: 100%;
+	cursor: pointer;
+      
+}
+
+.toggled-icon {
+    display: block;
+	width: 5vw;
+	height: 0.2em;
+	margin: 1.5em;
+	border-right:3vw solid yellow;
+	border-left: 1vw solid yellow;
+}
+
+.toggle-icon .bar {
+	display: block;
+	width: 5vw;
+	height: 0.2em;
+	margin: 1em;
+	border-right:3vw solid #fff;
+	border-left: 1vw solid #d6d6d6;
+}
+
+.toggle-icon .bar:nth-of-type(2) {
+    transform: rotate(-180deg);
+}
+.toggled-icon:nth-of-type(2) {
+    transform: rotate(-180deg);
+}
+
 .search-container {
     border:1px solid fuchsia;
     display: flex;
@@ -111,44 +150,7 @@ li{
 li:hover{
     font-weight: bold;
 }
-.toggle-container {
-    margin-left: 5vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    display:none; 
-}
 
-.toggle-icon {
-	width: 100%;
-	cursor: pointer;
-      
-}
-
-.toggled-icon {
-    display: block;
-	width: 5vw;
-	height: 0.2em;
-	margin: 1.5em;
-	border-right:3vw solid yellow;
-	border-left: 1vw solid yellow;
-}
-
-.toggle-icon .bar {
-	display: block;
-	width: 5vw;
-	height: 0.2em;
-	margin: 1.5em;
-	border-right:3vw solid #fff;
-	border-left: 1vw solid #d6d6d6;
-}
-
-.toggle-icon .bar:nth-of-type(2) {
-    transform: rotate(-180deg);
-}
-.toggled-icon:nth-of-type(2) {
-    transform: rotate(-180deg);
-}
 
 main {
     margin-left: auto;
@@ -156,27 +158,6 @@ main {
     min-height: 70%;
     width: 100%;
     border: #d6d6d6 1px solid;
-}
-footer {
-    margin-left: auto;
-    margin-right: auto;
-    height: 10%;
-    color: #d6d6d6;
-}
-footer p {
-    margin: 3px;
-    text-align: center;
-    font-family: Roboto;
-}
-footer p:nth-last-of-type(1){
-    font-size: small;
-    margin-top: 20px;
-}
-footer span{
-    color:#ffe81f
-}
-footer a {
-    color:#ffe81f;
 }
 
 .collage-container {
@@ -259,4 +240,46 @@ footer a {
     margin: auto;
     text-align: center;
     font-family: Roboto;
+}
+
+footer {
+    margin-left: auto;
+    margin-right: auto;
+    height: 10%;
+    color: #d6d6d6;
+}
+footer p {
+    margin: 3px;
+    text-align: center;
+    font-family: Roboto;
+}
+footer p:nth-last-of-type(1){
+    font-size: small;
+    margin-top: 20px;
+}
+footer span{
+    color:#ffe81f
+}
+footer a {
+    color:#ffe81f;
+}
+
+@media only screen and (max-width: 600px) {
+    .toggle-container{
+        display: flex;
+    }
+    .container1 {
+        position:unset;
+        margin-top:0;
+        justify-content: center;
+    }
+    .search-container{
+        margin-left: 30px;
+    }
+    .home-icon{
+        margin-right: 30px;
+    }
+    ul{
+        display: none;
+    }
 }
