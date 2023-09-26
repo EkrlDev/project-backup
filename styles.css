@@ -8,7 +8,6 @@
 html, body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
 }
 
 body{
@@ -147,6 +146,7 @@ main {
     margin-right: auto;
     min-height: 70%;
     width: 100%;
+    position: relative;
 }
 
 .collage-container {
@@ -252,6 +252,19 @@ footer span{
 footer a {
     color:#ffe81f;
 }
+.toggle-navigation{
+    display: hidden;
+}
+.toggle-navigation ul {
+    display: none;
+}
+.toggle-pushed-navigation {
+    display: hidden;
+}
+
+.toggle-pushed-navigation ul {
+    display: none;
+}
 
 @media only screen and (max-width: 768px) {
     
@@ -264,7 +277,7 @@ footer a {
         margin-left: 30px;
     }
     .home-icon{
-        margin-right: 30px;
+        margin-right: 60px;
         margin-top: 6px;
     }
     ul{
@@ -273,6 +286,8 @@ footer a {
     .toggle-container{
         display: flex;
     }
+    
+
     /*Toggle pushed*/
     .pushed {
     display: flex;
@@ -295,13 +310,38 @@ footer a {
         border-right-color: #ddf1da;
         box-shadow: 0.4em 0 0.6em 0.1em rgba(83,228,68,0.65);
 	    }
+
     .toggle-navigation{
         display: none;
     }
     .toggle-pushed-navigation {
-        height: 200px;
-        width: 200px;
+        height: 400px;
+        width: 300px;
         background-color: #1D1E1F;
         margin: auto;
+        position: absolute;
+        z-index: 1;
+        
     }
+        .toggle-pushed-navigation ul {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            margin-left: 30px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .toggle-pushed-navigation li{
+            color:#ffe81f;
+            margin-top:30px;
+            cursor: pointer;
+            font-family: Roboto;
+            font-size: large;
+            list-style: none;
+            font-weight: bold;
+            letter-spacing: 0.3em;
+        }
+        
 }

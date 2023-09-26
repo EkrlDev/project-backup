@@ -6,6 +6,7 @@ const getData = async () => {
 getData();
 
 let myFavorites = {};
+let isToggled = false;
 
 //Query Selectors
 const main = document.querySelector('main');
@@ -13,10 +14,15 @@ const collageContainer = document.querySelector('#collage-container');
 const toggleIcon = document.querySelector('#toggle-icon');
 const homeIcon = document.querySelector('#home-icon');
 const peopleBtn = document.querySelector('#people');
+const navPeopleBtn = document.querySelector('#nav-people');
 const speciesBtn = document.querySelector('#species');
+const navSpeciesBtn = document.querySelector('#nav-species');
 const starshipsBtn = document.querySelector('#starships');
+const navStarshipsBtn = document.querySelector('#nav-starships');
 const vehiclesBtn = document.querySelector('#vehicles');
+const navVehiclesBtn = document.querySelector('#nav-vehicles');
 const favoritesBtn = document.querySelector('#favorites');
+const navFavoritesBtn = document.querySelector('#nav-favorites');
 const bar = document.querySelectorAll("span")
 const searchInput = document.getElementById('search-input');
 
@@ -28,8 +34,8 @@ homeIcon.addEventListener("click", () =>{
     collectionSection.className = "collection-container-hidden";
 })
 
-let isToggled = false;
-toggleIcon.addEventListener('click', () =>{
+//Navigation Toggle Function
+const toggleHandler= () => {
     console.log('clicked',);
     if(!isToggled) {
         document.querySelector('#toggle-container').className = 'pushed';
@@ -40,7 +46,7 @@ toggleIcon.addEventListener('click', () =>{
         document.querySelector('#toggle-container').className = 'toggle-container'
         document.querySelector('#toggle-navigation').className = 'toggle-navigation'
     }
-})
+}
 
 //Search Functions
 const searchHandler = () => {
@@ -119,7 +125,7 @@ const deleteFromFavorites = (e) => {
                 if (myFavorites[key].length === 0) {
                     delete myFavorites[key];
                 }
-    }})
+        }})
     });
     favoritesRenderHandler();
 }
@@ -167,7 +173,8 @@ const collectionRender = (collection) => {
 
 //Navigating Functons
 const collectionRenderHandler = (e) => {
-    let collection = e.target.id;
+    let collection = e.target.dataset.key;
+    toggleHandler();
     collectionRender(collection)
 }
 
@@ -201,7 +208,7 @@ const favoritesRenderHandler = () => {
         });
         main.appendChild(newSection);
     })
-    console.log(myFavorites)
+    toggleHandler();
 }
 
 //Event Listeners
@@ -212,6 +219,12 @@ speciesBtn.addEventListener('click', collectionRenderHandler );
 starshipsBtn.addEventListener('click', collectionRenderHandler );
 vehiclesBtn.addEventListener('click', collectionRenderHandler );
 favoritesBtn.addEventListener('click', favoritesRenderHandler );
+toggleIcon.addEventListener('click', toggleHandler );
+navPeopleBtn.addEventListener('click', collectionRenderHandler );
+navSpeciesBtn.addEventListener('click', collectionRenderHandler );
+navStarshipsBtn.addEventListener('click', collectionRenderHandler );
+navVehiclesBtn.addEventListener('click', collectionRenderHandler );
+navFavoritesBtn.addEventListener('click', favoritesRenderHandler );
 
 
 
