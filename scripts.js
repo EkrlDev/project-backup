@@ -28,12 +28,19 @@ homeIcon.addEventListener("click", () =>{
     collectionSection.className = "collection-container-hidden";
 })
 
-// toggleIcon.addEventListener('click', () =>{
-//     console.log('clicked',);
-//     bar.forEach((e) => {
-//         e.className = 'toggled-icon';
-//     })
-// })
+let isToggled = false;
+toggleIcon.addEventListener('click', () =>{
+    console.log('clicked',);
+    if(!isToggled) {
+        document.querySelector('#toggle-container').className = 'pushed';
+        document.querySelector('#toggle-navigation').className = 'toggle-pushed-navigation'
+        isToggled = true;
+    } else {
+        isToggled = false;
+        document.querySelector('#toggle-container').className = 'toggle-container'
+        document.querySelector('#toggle-navigation').className = 'toggle-navigation'
+    }
+})
 
 //Search Functions
 const searchHandler = () => {
@@ -50,7 +57,6 @@ const searchHandler = () => {
     Object.keys(data).map(key => {
         data[key].map(item => {
             if (searchText && item.name.toLowerCase().includes(searchText)) {
-                console.log(item.name);
                 const newDiv = document.createElement('div');
                 newDiv.className = 'card';
                 const newImg = document.createElement('img');

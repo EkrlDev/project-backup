@@ -2,8 +2,7 @@
 *{
     box-sizing: border-box;
     margin:0px;
-    padding: 0px;
-    
+    padding: 0px; 
 }
 
 html, body {
@@ -33,7 +32,6 @@ header {
 }
 
 .logo-title {
-    border:1px solid orange;
     color: #fff;
     font-size:medium;
     font-family: Roboto;
@@ -45,7 +43,6 @@ header {
 .container1{
     display: flex;
     width: 100vw;
-    border: 1px solid yellow;
     justify-content: space-between;
     position:absolute;
     margin-top: 10vh;
@@ -53,7 +50,7 @@ header {
 
 .home-icon {
     cursor: pointer;
-    margin-left: 18vw;
+    margin-left: 10vw;
 }
 
 .toggle-container {
@@ -61,7 +58,6 @@ header {
     flex-direction: column;
     justify-content: flex-end;
     display:none; 
-    border: 1px solid #fff;
 }
 
 .toggle-icon {
@@ -70,22 +66,14 @@ header {
       
 }
 
-.toggled-icon {
-    display: block;
-	width: 5vw;
-	height: 0.2em;
-	margin: 1.5em;
-	border-right:3vw solid yellow;
-	border-left: 1vw solid yellow;
-}
-
 .toggle-icon .bar {
 	display: block;
-	width: 5vw;
+	width: 3.5em;
 	height: 0.2em;
-	margin: 1em;
-	border-right:3vw solid #fff;
-	border-left: 1vw solid #d6d6d6;
+	margin: 0.7em;
+	border-right: 2.5em solid #fff;
+	border-left: 0.6em solid #d6d6d6;
+	
 }
 
 .toggle-icon .bar:nth-of-type(2) {
@@ -95,8 +83,11 @@ header {
     transform: rotate(-180deg);
 }
 
+.pushed{
+    display: none;
+}
+
 .search-container {
-    border:1px solid fuchsia;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -134,7 +125,6 @@ ul{
     display: flex;
     justify-content: center;
     align-items: center;
-    border:1px solid red;
     width: 100vw;
 }
 
@@ -157,7 +147,6 @@ main {
     margin-right: auto;
     min-height: 70%;
     width: 100%;
-    border: #d6d6d6 1px solid;
 }
 
 .collage-container {
@@ -264,10 +253,8 @@ footer a {
     color:#ffe81f;
 }
 
-@media only screen and (max-width: 600px) {
-    .toggle-container{
-        display: flex;
-    }
+@media only screen and (max-width: 768px) {
+    
     .container1 {
         position:unset;
         margin-top:0;
@@ -278,8 +265,43 @@ footer a {
     }
     .home-icon{
         margin-right: 30px;
+        margin-top: 6px;
     }
     ul{
         display: none;
+    }
+    .toggle-container{
+        display: flex;
+    }
+    /*Toggle pushed*/
+    .pushed {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    }
+
+	    .pushed .bar:nth-of-type(1) {
+		opacity: 0;
+	    }
+
+	    .pushed .bar:nth-of-type(2) {
+		transform: rotate(-135deg);
+        border-right-color: #e9b8b9;
+        box-shadow: 0.4em 0 0.6em 0.1em rgba(205,40,44,0.75);
+	    }
+	    .pushed .bar:nth-of-type(3) {
+		transform: rotate(-45deg);
+        translate: 0 -13px;
+        border-right-color: #ddf1da;
+        box-shadow: 0.4em 0 0.6em 0.1em rgba(83,228,68,0.65);
+	    }
+    .toggle-navigation{
+        display: none;
+    }
+    .toggle-pushed-navigation {
+        height: 200px;
+        width: 200px;
+        background-color: #1D1E1F;
+        margin: auto;
     }
 }
