@@ -135,6 +135,7 @@ const collectionRender = (collection) => {
         newDiv.className = 'card';
         const newImg = document.createElement('img');
         newImg.src = collectionItem.src;
+        newImg.alt = `${collectionItem.name} photo`
         newDiv.appendChild(newImg);
         const favIcon = document.createElement('i');
         favIcon.className = 'fas fa-solid fa-check icon';
@@ -179,6 +180,7 @@ const favoritesRenderHandler = () => {
         newDiv.className = 'card';
         const newImg = document.createElement('img');
         newImg.src = item.favSrc;
+        newImg.alt = `${item.favName} photo`
         newDiv.appendChild(newImg);
         const removeIcon = document.createElement('i');
         removeIcon.className = 'fas fa-solid fa-trash icon deleteFav';
