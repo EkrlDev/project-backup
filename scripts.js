@@ -34,106 +34,6 @@ homeIcon.addEventListener("click", () =>{
     isToggled && toggleHandler();
 })
 
-const clearSearchInput = () => {
-    searchInput.value = '';
-    
-    isToggled && toggleHandler();
-    isToggled = false;
-}
-
-//Navigation Toggle Function
-const toggleHandler= () => {
-    if(!isToggled) {
-        document.querySelector('#toggle-container').className = 'toggle-pushed-container';
-        document.querySelector('#toggle-navigation').className = 'toggle-pushed-navigation'
-        isToggled = true;
-    } else {
-        isToggled = false;
-        document.querySelector('#toggle-container').className = 'toggle-container'
-        document.querySelector('#toggle-navigation').className = 'toggle-navigation'
-    }
-}
-
-//Search Functions
-const searchHandler = () => {
-    const collectionSection = document.querySelector('#collection-container');
-    if(collageContainer.className === 'collage-container') { 
-        collageContainer.className = 'collage-container-hidden';
-    } else if(collectionSection) {
-        collectionSection.remove();
-    }
-    const searchText = searchInput.value.toLowerCase()
-    const newSection = document.createElement('section')
-    newSection.id = 'collection-container';
-    newSection.className = 'collection-container';
-    Object.keys(data).map(key => {
-        data[key].map(item => {
-            if (searchText && item.name.toLowerCase().includes(searchText)) {
-                const newDiv = document.createElement('div');
-                newDiv.className = 'card';
-                const newImg = document.createElement('img');
-                newImg.src = item.src;
-                newDiv.appendChild(newImg);
-                const newP = document.createElement('p');
-                const newText = document.createTextNode(item.name)
-                newP.appendChild(newText);
-                newDiv.appendChild(newP);
-                newSection.appendChild(newDiv);
-                main.appendChild(newSection);
-            } else if (searchText && !item.name.toLowerCase().includes(searchText)){
-                if(collectionSection) {
-                    collectionSection.remove();
-                }
-            }else {
-                collectionSection && collectionSection.remove();
-                collageContainer.className = 'collage-container';
-            }
-        })
-        })
-    } 
-
-
-//Favorites Functions
-
-const addToFavorites = (e) => {
-    const name = e.target.parentElement.lastChild.textContent;
-    // Check if the name is already in myFavorites
-    let isAdded = false;
-
-    Object.keys(data).forEach(key => {
-        data[key].forEach(item => {
-            if (name === item.name) {
-                if (myFavorites[key]) {
-                    // Category key already exists in myFavorites, so append to the array
-                    myFavorites[key].push({favName:item.name, favSrc:item.src});
-                } else {
-                    // Category key does not exist in myFavorites, create a new array
-                    myFavorites[key] = [{favName:item.name, favSrc:item.src}];
-                }
-                isAdded = true;
-            }
-        });
-    })
-    const collection = e.target.parentNode.parentNode.dataset.key
-    collectionRender(collection)
-}
-
-const deleteFromFavorites = (e) => {
-    const name = e.target.parentElement.lastChild.textContent;
-
-    Object.keys(myFavorites).forEach(key => {
-        myFavorites[key].forEach(item => {
-            if(myFavorites[key] && item.favName === name) {
-                myFavorites[key] = myFavorites[key].filter(item => item.favName !== name);
-                if (myFavorites[key].length === 0) {
-                    delete myFavorites[key];
-                }
-        }})
-    });
-    favoritesRenderHandler();
-}
-
-
 //Render Functon
 const collectionRender = (collection) => {
     collageContainer.className = 'collage-container-hidden';
@@ -175,11 +75,82 @@ const collectionRender = (collection) => {
     isToggled && toggleHandler();
 }
 
-//Navigating Functons
-const collectionRenderHandler = (e) => {
-    let collection = e.target.dataset.key;
-    toggleHandler();
+//Search Functions
+const searchHandler = () => {
+    const collectionSection = document.querySelector('#collection-container');
+    if(collageContainer.className === 'collage-container') { 
+        collageContainer.className = 'collage-container-hidden';
+    } else if(collectionSection) {
+        collectionSection.remove();
+    }
+    const searchText = searchInput.value.toLowerCase()
+    const newSection = document.createElement('section')
+    newSection.id = 'collection-container';
+    newSection.className = 'collection-container';
+    Object.keys(data).map(key => {
+        data[key].map(item => {
+            if (searchText && item.name.toLowerCase().includes(searchText)) {
+                const newDiv = document.createElement('div');
+                newDiv.className = 'card';
+                const newImg = document.createElement('img');
+                newImg.src = item.src;
+                newDiv.appendChild(newImg);
+                const newP = document.createElement('p');
+                const newText = document.createTextNode(item.name)
+                newP.appendChild(newText);
+                newDiv.appendChild(newP);
+                newSection.appendChild(newDiv);
+                main.appendChild(newSection);
+            } else if (searchText && !item.name.toLowerCase().includes(searchText)){
+                if(collectionSection) {
+                    collectionSection.remove();
+                }
+            }else {
+                collectionSection && collectionSection.remove();
+                collageContainer.className = 'collage-container';
+            }
+        })
+        })
+    } 
+
+const clearSearchInput = () => {
+    searchInput.value = ''; 
+    isToggled && toggleHandler();
+    isToggled = false;
+}
+
+//Favorites Functions
+const addToFavorites = (e) => {
+    const name = e.target.parentElement.lastChild.textContent;
+    Object.keys(data).forEach(key => {
+        data[key].forEach(item => {
+            if (name === item.name) {
+                if (myFavorites[key]) {
+                    // Category key already exists in myFavorites, so append to the array
+                    myFavorites[key].push({favName:item.name, favSrc:item.src});
+                } else {
+                    // Category key does not exist in myFavorites, create a new array
+                    myFavorites[key] = [{favName:item.name, favSrc:item.src}];
+                } 
+            }
+        });
+    })
+    const collection = e.target.parentNode.parentNode.dataset.key
     collectionRender(collection)
+}
+
+const deleteFromFavorites = (e) => {
+    const name = e.target.parentElement.lastChild.textContent;
+    Object.keys(myFavorites).forEach(key => {
+        myFavorites[key].forEach(item => {
+            if(myFavorites[key] && item.favName === name) {
+                myFavorites[key] = myFavorites[key].filter(item => item.favName !== name);
+                if (myFavorites[key].length === 0) {
+                    delete myFavorites[key];
+                }
+        }})
+    });
+    favoritesRenderHandler();
 }
 
 const favoritesRenderHandler = () => {
@@ -214,6 +185,27 @@ const favoritesRenderHandler = () => {
     })
     isToggled && toggleHandler();
 }
+
+//Navigating Functon
+const collectionRenderHandler = (e) => {
+    let collection = e.target.dataset.key;
+    toggleHandler();
+    collectionRender(collection)
+}
+
+//Navigation Toggle Function
+const toggleHandler= () => {
+    if(!isToggled) {
+        document.querySelector('#toggle-container').className = 'toggle-pushed-container';
+        document.querySelector('#toggle-navigation').className = 'toggle-pushed-navigation'
+        isToggled = true;
+    } else {
+        isToggled = false;
+        document.querySelector('#toggle-container').className = 'toggle-container'
+        document.querySelector('#toggle-navigation').className = 'toggle-navigation'
+    }
+}
+
 
 //Event Listeners
 searchInput.addEventListener('focus', clearSearchInput)

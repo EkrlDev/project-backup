@@ -135,11 +135,11 @@ main {
     max-width: 100%; 
     width: 90%;
     margin: auto;
-    margin-top: 10px;
+    margin-top: 20px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
+    gap: 25px;
 }
 .collection-container-hidden{
     display: none;
