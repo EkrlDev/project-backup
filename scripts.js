@@ -28,17 +28,23 @@ const searchInput = document.getElementById('search-input');
 
 
 homeIcon.addEventListener("click", () =>{
-    console.log("homeIcon clicked");
     collageContainer.className = 'collage-container';
     const collectionSection = document.querySelector('#collection-container');
-    collectionSection.className = "collection-container-hidden";
+    if (collectionSection){collectionSection.className = "collection-container-hidden"};
+    isToggled && toggleHandler();
 })
+
+const clearSearchInput = () => {
+    searchInput.value = '';
+    
+    isToggled && toggleHandler();
+    isToggled = false;
+}
 
 //Navigation Toggle Function
 const toggleHandler= () => {
-    console.log('clicked',);
     if(!isToggled) {
-        document.querySelector('#toggle-container').className = 'pushed';
+        document.querySelector('#toggle-container').className = 'toggle-pushed-container';
         document.querySelector('#toggle-navigation').className = 'toggle-pushed-navigation'
         isToggled = true;
     } else {
@@ -79,16 +85,13 @@ const searchHandler = () => {
                     collectionSection.remove();
                 }
             }else {
-                collectionSection.remove();
+                collectionSection && collectionSection.remove();
                 collageContainer.className = 'collage-container';
             }
         })
         })
     } 
-const clearSearchInput = () => {
-    searchInput.value = '';
-    searchHandler();
-}
+
 
 //Favorites Functions
 
@@ -156,7 +159,7 @@ const collectionRender = (collection) => {
         Object.keys(myFavorites).forEach(key => {
             myFavorites[key].forEach(item => {
                 if(item.favName === collectionItem.name){
-                    favIcon.className = 'fas fa-solid fa-heart icon inFav';
+                    favIcon.className = 'fas fa-solid fa-heart inFav';
                     favIcon.removeEventListener('click',addToFavorites)
                     favIcon.title = '';
                 } 

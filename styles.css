@@ -61,8 +61,7 @@ header {
 
 .toggle-icon {
 	width: 100%;
-	cursor: pointer;
-      
+	cursor: pointer;  
 }
 
 .toggle-icon .bar {
@@ -71,8 +70,7 @@ header {
 	height: 0.2em;
 	margin: 0.7em;
 	border-right: 2.5em solid #fff;
-	border-left: 0.6em solid #d6d6d6;
-	
+	border-left: 0.6em solid #d6d6d6;	
 }
 
 .toggle-icon .bar:nth-of-type(2) {
@@ -82,7 +80,7 @@ header {
     transform: rotate(-180deg);
 }
 
-.pushed{
+.toggle-pushed-container{
     display: none;
 }
 
@@ -117,7 +115,7 @@ header {
     color: #ffe81f;
     width:10%;
     height: 100%;
-    margin-right: 6px;
+    margin-right: 8px;
 }
 
 ul{
@@ -213,11 +211,18 @@ main {
    cursor: pointer; 
    color: #fff;
    font-size: 25px;
+   transition: font-size 200ms;
 }
+    .icon:hover {
+        font-size: 35px;
+    }
 .inFav {
+    position:absolute;
+    top:10px;
+    right:10px;
     color: #ffe81f;
-    font-size: 20px;
-    cursor: default; 
+    font-size: 30px;
+    cursor: default;
 }
 .deleteFav {
    color: #ffe81f;
@@ -289,22 +294,22 @@ footer a {
     
 
     /*Toggle pushed*/
-    .pushed {
+    .toggle-pushed-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-end; 
     }
 
-	    .pushed .bar:nth-of-type(1) {
+        .toggle-pushed-container .bar:nth-of-type(1) {
 		opacity: 0;
 	    }
 
-	    .pushed .bar:nth-of-type(2) {
+	    .toggle-pushed-container .bar:nth-of-type(2) {
 		transform: rotate(-135deg);
         border-right-color: #e9b8b9;
         box-shadow: 0.4em 0 0.6em 0.1em rgba(205,40,44,0.75);
 	    }
-	    .pushed .bar:nth-of-type(3) {
+	    .toggle-pushed-container .bar:nth-of-type(3) {
 		transform: rotate(-45deg);
         translate: 0 -13px;
         border-right-color: #ddf1da;
