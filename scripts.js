@@ -5,7 +5,11 @@ const getData = async () => {
 };
 getData();
 
-let myFavorites = {};
+let myFavorites = {}
+const favorites = localStorage.getItem('myFavorites');
+if(favorites){
+    myFavorites = JSON.parse(favorites)
+}
 let isToggled = false;
 
 //Query Selectors
@@ -132,9 +136,11 @@ const addToFavorites = (e) => {
                     // Category key does not exist in myFavorites, create a new array
                     myFavorites[key] = [{favName:item.name, favSrc:item.src}];
                 } 
+                
             }
         });
     })
+    localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
     const collection = e.target.parentNode.parentNode.dataset.key
     collectionRender(collection)
 }
@@ -150,6 +156,7 @@ const deleteFromFavorites = (e) => {
                 }
         }})
     });
+    localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
     favoritesRenderHandler();
 }
 
