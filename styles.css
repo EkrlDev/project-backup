@@ -302,7 +302,7 @@ footer a {
 	    }
 
     .toggle-navigation{
-        display: block;
+        display: hidden;
         height: 400px;
         width: 300px;
         left: -100;
