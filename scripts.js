@@ -36,6 +36,7 @@ homeIcon.addEventListener("click", () =>{
     const collectionSection = document.querySelector('#collection-container');
     if (collectionSection){collectionSection.className = "collection-container-hidden"};
     isToggled && toggleHandler();
+    clearSearchInput();
 })
 
 //Render Functon
@@ -197,6 +198,7 @@ const favoritesRenderHandler = () => {
 const collectionRenderHandler = (e) => {
     let collection = e.target.dataset.key;
     toggleHandler();
+    clearSearchInput();
     collectionRender(collection)
 }
 

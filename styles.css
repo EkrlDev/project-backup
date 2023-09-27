@@ -256,6 +256,10 @@ footer a {
         margin-top: 6px;
         margin-right: 60px;
     }
+    .home-icon:hover{
+        width: 45px;
+        height: 45px;
+    }
     ul{
         display: none;
     }
