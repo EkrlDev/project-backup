@@ -172,6 +172,7 @@ const collectionRender = (collection) => {
         newSection.appendChild(newDiv);
     })
     main.appendChild(newSection);
+    isToggled && toggleHandler();
 }
 
 //Navigating Functons
@@ -211,7 +212,7 @@ const favoritesRenderHandler = () => {
         });
         main.appendChild(newSection);
     })
-    toggleHandler();
+    isToggled && toggleHandler();
 }
 
 //Event Listeners

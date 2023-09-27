@@ -29,7 +29,6 @@ header {
     margin-top: 5vh;
 
 }
-
 .logo-title {
     color: #fff;
     font-size:medium;
@@ -52,45 +51,12 @@ header {
     margin-left: 10vw;
 }
 
-.toggle-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    display:none; 
-}
-
-.toggle-icon {
-	width: 100%;
-	cursor: pointer;  
-}
-
-.toggle-icon .bar {
-	display: block;
-	width: 3.5em;
-	height: 0.2em;
-	margin: 0.7em;
-	border-right: 2.5em solid #fff;
-	border-left: 0.6em solid #d6d6d6;	
-}
-
-.toggle-icon .bar:nth-of-type(2) {
-    transform: rotate(-180deg);
-}
-.toggled-icon:nth-of-type(2) {
-    transform: rotate(-180deg);
-}
-
-.toggle-pushed-container{
-    display: none;
-}
-
 .search-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-right: 40px;   
 }
-
 .search-field {
     border:1px solid #ffe81f;
     padding: 0 6px 0 6px;
@@ -99,7 +65,6 @@ header {
     align-items: center;
     width: 20vw;
 }
-
 .search-input {
     border:none;
     background-color: transparent;
@@ -124,7 +89,6 @@ ul{
     align-items: center;
     width: 100vw;
 }
-
 li{
     color:#ffe81f;
     margin:5px 15px;
@@ -133,7 +97,6 @@ li{
     font-size: large;
     list-style: none;
 }
-
 li:hover{
     font-weight: bold;
 }
@@ -154,11 +117,9 @@ main {
     margin: auto;
     display: flex;
 }
-
 .collage-container-hidden{
     display: none;
 }
-
 .collage-img {
     margin-left: auto;
     margin-right: auto;
@@ -180,7 +141,6 @@ main {
     justify-content: center;
     gap: 15px;
 }
-
 .collection-container-hidden{
     display: none;
 }
@@ -193,7 +153,6 @@ main {
     border-radius: 5px;
     position: relative 
 }
-
 .card img{
     width: 100%;
     max-width: 300px;
@@ -202,6 +161,12 @@ main {
     border: none;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
+}
+.card p {
+    color:#000;
+    margin: auto;
+    text-align: center;
+    font-family: Roboto;
 }
 
 .icon {
@@ -229,13 +194,6 @@ main {
    font-size: 20px;
 }
 
-.card p {
-    color:#000;
-    margin: auto;
-    text-align: center;
-    font-family: Roboto;
-}
-
 footer {
     margin-left: auto;
     margin-right: auto;
@@ -257,19 +215,21 @@ footer span{
 footer a {
     color:#ffe81f;
 }
-.toggle-navigation{
-    display: hidden;
-}
-.toggle-navigation ul {
+
+.toggle-container{
     display: none;
 }
-.toggle-pushed-navigation {
-    display: hidden;
+.toggle-pushed-container{
+    display: none;
+}
+.toggle-navigation{
+    display: none;
 }
 
-.toggle-pushed-navigation ul {
+.toggle-pushed-navigation {
     display: none;
 }
+
 
 @media only screen and (max-width: 768px) {
     
@@ -288,8 +248,33 @@ footer a {
     ul{
         display: none;
     }
-    .toggle-container{
+
+    .toggle-container {
         display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    
+    .toggle-icon {
+        width: 100%;
+        cursor: pointer;  
+    }
+    
+    .toggle-icon .bar {
+        display: block;
+        width: 3.5em;
+        height: 0.2em;
+        margin: 0.7em;
+        border-right: 2.5em solid #fff;
+        border-left: 0.6em solid #d6d6d6;
+        transition: transform 0.3s ease, opacity 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;	
+    }
+    
+    .toggle-icon .bar:nth-of-type(2) {
+        transform: rotate(-180deg);
+    }
+    .toggled-icon:nth-of-type(2) {
+        transform: rotate(-180deg);
     }
     
 
@@ -317,16 +302,44 @@ footer a {
 	    }
 
     .toggle-navigation{
-        display: none;
-    }
-    .toggle-pushed-navigation {
+        display: block;
         height: 400px;
         width: 300px;
+        left: -100;
         background-color: #1D1E1F;
         margin: auto;
         position: absolute;
         z-index: 1;
+        animation: slideOut 0.4s forwards;
+    }
+    .toggle-pushed-navigation {
+        display:block;
+        height: 400px;
+        width: 300px;
+        left: 0;
+        background-color: #1D1E1F;
+        margin: auto;
+        position: absolute;
+        z-index: 1;
+        animation: slideIn 0.3s forwards;
         
+    }
+    @keyframes slideIn {
+        0% {
+            left: -100%;
+        }
+        100% {
+            left: 0;
+        }
+    }
+    
+    @keyframes slideOut {
+        0% {
+            left: 0;
+        }
+        100% {
+            left: -100%;
+        }
     }
         .toggle-pushed-navigation ul {
             display: flex;
