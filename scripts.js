@@ -39,6 +39,34 @@ homeIcon.addEventListener("click", () =>{
     clearSearchInput();
 })
 
+const createCard = (collectionItem) => {
+    const newDiv = document.createElement('div');
+    newDiv.className = 'card';
+    const newImg = document.createElement('img');
+    newImg.src = collectionItem.src;
+    newImg.alt = `${collectionItem.name} photo`
+    newDiv.appendChild(newImg);
+    const newIcon = document.createElement('i');
+    newIcon.className = 'fa fa-heart-o icon';
+    newIcon.addEventListener('click', addToFavorites)
+    newIcon.title = 'Add to Favorites';
+    Object.keys(myFavorites).forEach(key => {
+        myFavorites[key].forEach(item => {
+            if(item.favName === collectionItem.name){
+                newIcon.className = 'fa fa-heart icon';
+                newIcon.removeEventListener('click',addToFavorites)
+                newIcon.addEventListener('click',deleteFromFavorites)
+                newIcon.title = 'Remove';
+            } 
+        })});
+    newDiv.appendChild(newIcon);
+    const newP = document.createElement('p');
+    const newText = document.createTextNode(collectionItem.name)
+    newP.appendChild(newText);
+    newDiv.appendChild(newP);
+    return newDiv;
+}
+
 //Render Functon
 const collectionRender = (collection) => {
     collageContainer.className = 'collage-container-hidden';
@@ -50,30 +78,8 @@ const collectionRender = (collection) => {
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
     newSection.setAttribute('data-key', collection)
-    data[collection].map(collectionItem => {
-        const newDiv = document.createElement('div');
-        newDiv.className = 'card';
-        const newImg = document.createElement('img');
-        newImg.src = collectionItem.src;
-        newImg.alt = `${collectionItem.name} photo`
-        newDiv.appendChild(newImg);
-        const favIcon = document.createElement('i');
-        favIcon.className = 'fas fa-solid fa-check icon';
-        favIcon.addEventListener('click', addToFavorites)
-        favIcon.title = 'Add to Favorites';
-        Object.keys(myFavorites).forEach(key => {
-            myFavorites[key].forEach(item => {
-                if(item.favName === collectionItem.name){
-                    favIcon.className = 'fas fa-solid fa-heart inFav';
-                    favIcon.removeEventListener('click',addToFavorites)
-                    favIcon.title = '';
-                } 
-            })});
-        newDiv.appendChild(favIcon);
-        const newP = document.createElement('p');
-        const newText = document.createTextNode(collectionItem.name)
-        newP.appendChild(newText);
-        newDiv.appendChild(newP);
+    data[collection].map(item => {
+        const newDiv = createCard(item)
         newSection.appendChild(newDiv);
     })
     main.appendChild(newSection);
@@ -127,6 +133,7 @@ const clearSearchInput = () => {
 //Favorites Functions
 const addToFavorites = (e) => {
     const name = e.target.parentElement.lastChild.textContent;
+    const collection = e.target.parentNode.parentNode.dataset.key
     Object.keys(data).forEach(key => {
         data[key].forEach(item => {
             if (name === item.name) {
@@ -142,12 +149,12 @@ const addToFavorites = (e) => {
         });
     })
     localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
-    const collection = e.target.parentNode.parentNode.dataset.key
     collectionRender(collection)
 }
 
 const deleteFromFavorites = (e) => {
     const name = e.target.parentElement.lastChild.textContent;
+    const collection = e.target.parentNode.parentNode.dataset.key
     Object.keys(myFavorites).forEach(key => {
         myFavorites[key].forEach(item => {
             if(myFavorites[key] && item.favName === name) {
@@ -158,8 +165,15 @@ const deleteFromFavorites = (e) => {
         }})
     });
     localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
-    favoritesRenderHandler();
+    collectionRender(collection)
 }
+
+const favoritesRender = () => {
+    
+    Object.keys(myFavorites).forEach(key => {
+        console.log(key)});
+}
+
 
 const favoritesRenderHandler = () => {
     collageContainer.className = 'collage-container-hidden';
@@ -223,7 +237,7 @@ peopleBtn.addEventListener('click', collectionRenderHandler );
 speciesBtn.addEventListener('click', collectionRenderHandler );
 starshipsBtn.addEventListener('click', collectionRenderHandler );
 vehiclesBtn.addEventListener('click', collectionRenderHandler );
-favoritesBtn.addEventListener('click', favoritesRenderHandler );
+favoritesBtn.addEventListener('click', favoritesRender );
 toggleIcon.addEventListener('click', toggleHandler );
 navPeopleBtn.addEventListener('click', collectionRenderHandler );
 navSpeciesBtn.addEventListener('click', collectionRenderHandler );
