@@ -39,6 +39,7 @@ homeIcon.addEventListener("click", () =>{
     clearSearchInput();
 })
 
+/* Create Card */
 const createCard = (collectionItem) => {
     const newDiv = document.createElement('div');
     newDiv.className = 'card';
@@ -95,6 +96,13 @@ const collectionRender = (collection) => {
     isToggled && toggleHandler();
 }
 
+//Navigating Functon
+const collectionRenderHandler = (e) => {
+    let collection = e.target.dataset.key;
+    toggleHandler();
+    clearSearchInput();
+    collectionRender(collection)
+}
 
 //Search Functions
 const searchHandler = () => {
@@ -153,8 +161,7 @@ const addToFavorites = (e) => {
                 } else {
                     // Category key does not exist in myFavorites, create a new array
                     myFavorites[key] = [{name:item.name, src:item.src}];
-                } 
-                
+                }    
             }
         });
     })
@@ -164,8 +171,7 @@ const addToFavorites = (e) => {
 
 const deleteFromFavorites = (e) => {
     const name = e.target.parentElement.lastChild.textContent;
-    const collection = e.target.parentNode.parentNode.dataset.key
-    console.log(name, collection)
+    const collection = e.target.parentNode.parentNode.dataset.key;
     Object.keys(myFavorites).forEach(key => {
         myFavorites[key].forEach(item => {
             if(myFavorites[key] && item.name === name) {
@@ -176,50 +182,6 @@ const deleteFromFavorites = (e) => {
         }})
     });
     localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
-    collectionRender(collection)
-}
-
-
-
-const favoritesRenderHandler = () => {
-    collageContainer.className = 'collage-container-hidden';
-    const collectionSection = document.querySelector('#collection-container');
-    if(collectionSection) {
-        collectionSection.remove();
-    }
-    const newSection = document.createElement('section')
-    newSection.id = 'collection-container';
-    newSection.className = 'collection-container';
-    Object.keys(myFavorites).forEach(key => {
-        myFavorites[key].forEach(item => {
-        const newDiv = document.createElement('div');
-        newDiv.className = 'card';
-        const newImg = document.createElement('img');
-        newImg.src = item.favSrc;
-        newImg.alt = `${item.favName} photo`
-        newDiv.appendChild(newImg);
-        const removeIcon = document.createElement('i');
-        removeIcon.className = 'fas fa-solid fa-trash icon deleteFav';
-        removeIcon.addEventListener('click', deleteFromFavorites)
-        removeIcon.title = 'Remove';
-        newDiv.appendChild(removeIcon);
-        const newP = document.createElement('p');
-        const newText = document.createTextNode(item.favName)
-        newP.appendChild(newText);
-        newDiv.appendChild(newP);
-        newSection.appendChild(newDiv);
-        });
-        main.appendChild(newSection);
-    })
-    isToggled && toggleHandler();
-}
-
-//Navigating Functon
-const collectionRenderHandler = (e) => {
-    let collection = e.target.dataset.key;
-    console.log(collection)
-    toggleHandler();
-    clearSearchInput();
     collectionRender(collection)
 }
 
@@ -236,7 +198,6 @@ const toggleHandler= () => {
     }
 }
 
-
 //Event Listeners
 searchInput.addEventListener('focus', clearSearchInput)
 searchInput.addEventListener('input', searchHandler)
@@ -250,10 +211,4 @@ navPeopleBtn.addEventListener('click', collectionRenderHandler );
 navSpeciesBtn.addEventListener('click', collectionRenderHandler );
 navStarshipsBtn.addEventListener('click', collectionRenderHandler );
 navVehiclesBtn.addEventListener('click', collectionRenderHandler );
-navFavoritesBtn.addEventListener('click', favoritesRenderHandler );
-
-
-
-
-
-
+navFavoritesBtn.addEventListener('click', collectionRenderHandler );
