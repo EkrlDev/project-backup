@@ -52,7 +52,7 @@ const createCard = (collectionItem) => {
     newIcon.title = 'Add to Favorites';
     Object.keys(myFavorites).forEach(key => {
         myFavorites[key].forEach(item => {
-            if(item.favName === collectionItem.name){
+            if(item.name === collectionItem.name){
                 newIcon.className = 'fa fa-heart inFav';
                 newIcon.removeEventListener('click',addToFavorites)
                 newIcon.addEventListener('click',deleteFromFavorites)
@@ -78,13 +78,23 @@ const collectionRender = (collection) => {
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
     newSection.setAttribute('data-key', collection)
-    data[collection].map(item => {
-        const newDiv = createCard(item)
-        newSection.appendChild(newDiv);
-    })
+    if(collection === 'favorites'){
+        Object.keys(myFavorites).forEach(key => {
+            myFavorites[key].forEach(item => {
+               const newDiv = createCard(item)
+               newSection.appendChild(newDiv);
+            })     
+        })
+    } else {
+        data[collection].map(item => {
+            const newDiv = createCard(item)
+            newSection.appendChild(newDiv);
+        })
+    }
     main.appendChild(newSection);
     isToggled && toggleHandler();
 }
+
 
 //Search Functions
 const searchHandler = () => {
@@ -139,10 +149,10 @@ const addToFavorites = (e) => {
             if (name === item.name) {
                 if (myFavorites[key]) {
                     // Category key already exists in myFavorites, so append to the array
-                    myFavorites[key].push({favName:item.name, favSrc:item.src});
+                    myFavorites[key].push({name:item.name, src:item.src});
                 } else {
                     // Category key does not exist in myFavorites, create a new array
-                    myFavorites[key] = [{favName:item.name, favSrc:item.src}];
+                    myFavorites[key] = [{name:item.name, src:item.src}];
                 } 
                 
             }
@@ -155,10 +165,11 @@ const addToFavorites = (e) => {
 const deleteFromFavorites = (e) => {
     const name = e.target.parentElement.lastChild.textContent;
     const collection = e.target.parentNode.parentNode.dataset.key
+    console.log(name, collection)
     Object.keys(myFavorites).forEach(key => {
         myFavorites[key].forEach(item => {
-            if(myFavorites[key] && item.favName === name) {
-                myFavorites[key] = myFavorites[key].filter(item => item.favName !== name);
+            if(myFavorites[key] && item.name === name) {
+                myFavorites[key] = myFavorites[key].filter(item => item.name !== name);
                 if (myFavorites[key].length === 0) {
                     delete myFavorites[key];
                 }
@@ -168,11 +179,6 @@ const deleteFromFavorites = (e) => {
     collectionRender(collection)
 }
 
-const favoritesRender = () => {
-    
-    Object.keys(myFavorites).forEach(key => {
-        console.log(key)});
-}
 
 
 const favoritesRenderHandler = () => {
@@ -211,6 +217,7 @@ const favoritesRenderHandler = () => {
 //Navigating Functon
 const collectionRenderHandler = (e) => {
     let collection = e.target.dataset.key;
+    console.log(collection)
     toggleHandler();
     clearSearchInput();
     collectionRender(collection)
@@ -237,7 +244,7 @@ peopleBtn.addEventListener('click', collectionRenderHandler );
 speciesBtn.addEventListener('click', collectionRenderHandler );
 starshipsBtn.addEventListener('click', collectionRenderHandler );
 vehiclesBtn.addEventListener('click', collectionRenderHandler );
-favoritesBtn.addEventListener('click', favoritesRender );
+favoritesBtn.addEventListener('click', collectionRenderHandler );
 toggleIcon.addEventListener('click', toggleHandler );
 navPeopleBtn.addEventListener('click', collectionRenderHandler );
 navSpeciesBtn.addEventListener('click', collectionRenderHandler );
