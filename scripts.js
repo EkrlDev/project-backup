@@ -53,7 +53,7 @@ const createCard = (collectionItem) => {
     Object.keys(myFavorites).forEach(key => {
         myFavorites[key].forEach(item => {
             if(item.favName === collectionItem.name){
-                newIcon.className = 'fa fa-heart icon';
+                newIcon.className = 'fa fa-heart inFav';
                 newIcon.removeEventListener('click',addToFavorites)
                 newIcon.addEventListener('click',deleteFromFavorites)
                 newIcon.title = 'Remove';
