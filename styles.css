@@ -222,6 +222,10 @@ footer span{
     color:#ffe81f;
 }
 footer a {
+    text-decoration: none;
+    color:#fff;
+}
+footer a:hover{
     color:#ffe81f;
 }
 
