@@ -113,7 +113,7 @@ const searchHandler = () => {
         collectionSection.remove();
     }
     const searchText = searchInput.value.toLowerCase()
-    const newSection = document.createElement('section')
+        const newSection = document.createElement('section')
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
     Object.keys(data).map(key => {
