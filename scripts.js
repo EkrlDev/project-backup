@@ -6,6 +6,8 @@ const getData = async () => {
 getData();
 
 let myFavorites = {}
+let foundItemsInSearch = [];
+
 const favorites = localStorage.getItem('myFavorites');
 if(favorites){
     myFavorites = JSON.parse(favorites)
@@ -39,6 +41,10 @@ const renderHomePage = () => {
     clearSearchInput();
 };
 
+const goToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 /* Create Card */
 const createCard = (collectionItem) => {
     const newDiv = document.createElement('div');
@@ -68,6 +74,7 @@ const createCard = (collectionItem) => {
     return newDiv;
 }
 
+
 //Render Functon
 const collectionRender = (collection) => {
     collageContainer.className = 'collage-container-hidden';
@@ -75,17 +82,29 @@ const collectionRender = (collection) => {
     if(collectionSection) {
         collectionSection.remove();
     }
-    const newSection = document.createElement('section')
+    const newIcon = document.createElement('i');
+    newIcon.className = 'fas fa-angle-double-up';
+    const goToTopButton = document.createElement('button');
+    goToTopButton.appendChild(newIcon);
+    goToTopButton.addEventListener('click', goToTop);
+    goToTopButton.className = 'goToTop';
+    const newSection = document.createElement('section');
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
     newSection.setAttribute('data-key', collection)
+    newSection.appendChild(goToTopButton)
     if(collection === 'favorites'){
         Object.keys(myFavorites).forEach(key => {
-            myFavorites[key].forEach(item => {
-               const newDiv = createCard(item)
-               newSection.appendChild(newDiv);
+            myFavorites[key].forEach(item => { 
+               const newDiv = createCard(item);
+               newSection.appendChild(newDiv);  
             })     
         })
+    }else if(collection === 'searchSection'){
+            foundItemsInSearch.map(item =>{
+                const newDiv = createCard(item);
+                newSection.appendChild(newDiv);
+            })
     } else {
         data[collection].map(item => {
             const newDiv = createCard(item)
@@ -104,35 +123,19 @@ const collectionRenderHandler = (e) => {
     collectionRender(collection)
 }
 
-//Search Functions
-const searchHandler = () => {
-    collageContainer.className = 'collage-container-hidden';
-    const collectionSection = document.querySelector('#collection-container');
-    if(collectionSection) {
-        collectionSection.remove();
-    }
-    const newSection = document.createElement('section')
-    newSection.id = 'collection-container';
-    newSection.className = 'collection-container';
-    newSection.setAttribute('data-key', 'searchSection')
-    const searchText = searchInput.value.toLowerCase()
+const searchHandler = (e) => {
+    const searchText = e.target.value;
+    foundItemsInSearch = [];
     Object.keys(data).map(key => {
         data[key].map(item => {
             if (searchText && item.name.toLowerCase().includes(searchText)) {
-                const newDiv = createCard(item)
-                newSection.appendChild(newDiv);
-                main.appendChild(newSection);
-            } else if (searchText && !item.name.toLowerCase().includes(searchText)){
-                if(collectionSection) {
-                    collectionSection.remove();
-                }
-            }else {
-                collectionSection && collectionSection.remove();
-                collageContainer.className = 'collage-container';
+                foundItemsInSearch.push(item);
             }
         })
-        })
-    } 
+    })
+    collectionRender('searchSection');
+} 
+
 
 const clearSearchInput = () => {
     searchInput.value = ''; 
@@ -158,7 +161,7 @@ const addToFavorites = (e) => {
         });
     })
     localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
-    collection === 'searchSection' ? searchHandler() : collectionRender(collection)
+    collectionRender(collection)
 }
 
 const deleteFromFavorites = (e) => {
@@ -174,7 +177,7 @@ const deleteFromFavorites = (e) => {
         }})
     });
     localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
-    collection === 'searchSection' ? searchHandler() : collectionRender(collection)
+    collectionRender(collection)
 }
 
 //Navigation Toggle Function
