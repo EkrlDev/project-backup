@@ -212,11 +212,12 @@ footer {
 footer p {
     margin: 3px;
     font-family: Roboto;
+    font-size: x-small;
     text-align: center;
 }
 footer p:nth-last-of-type(1){
-    margin-top: 20px;
-    font-size: small;
+    margin-top: 5px;
+    font-size: xx-small;
 }
 footer span{
     color:#ffe81f;
