@@ -106,28 +106,20 @@ const collectionRenderHandler = (e) => {
 
 //Search Functions
 const searchHandler = () => {
+    collageContainer.className = 'collage-container-hidden';
     const collectionSection = document.querySelector('#collection-container');
-    if(collageContainer.className === 'collage-container') { 
-        collageContainer.className = 'collage-container-hidden';
-    } else if(collectionSection) {
+    if(collectionSection) {
         collectionSection.remove();
     }
-    const searchText = searchInput.value.toLowerCase()
-        const newSection = document.createElement('section')
+    const newSection = document.createElement('section')
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
+    newSection.setAttribute('data-key', 'searchSection')
+    const searchText = searchInput.value.toLowerCase()
     Object.keys(data).map(key => {
         data[key].map(item => {
             if (searchText && item.name.toLowerCase().includes(searchText)) {
-                const newDiv = document.createElement('div');
-                newDiv.className = 'card';
-                const newImg = document.createElement('img');
-                newImg.src = item.src;
-                newDiv.appendChild(newImg);
-                const newP = document.createElement('p');
-                const newText = document.createTextNode(item.name)
-                newP.appendChild(newText);
-                newDiv.appendChild(newP);
+                const newDiv = createCard(item)
                 newSection.appendChild(newDiv);
                 main.appendChild(newSection);
             } else if (searchText && !item.name.toLowerCase().includes(searchText)){
@@ -166,7 +158,7 @@ const addToFavorites = (e) => {
         });
     })
     localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
-    collectionRender(collection)
+    collection === 'searchSection' ? searchHandler() : collectionRender(collection)
 }
 
 const deleteFromFavorites = (e) => {
@@ -182,7 +174,7 @@ const deleteFromFavorites = (e) => {
         }})
     });
     localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
-    collectionRender(collection)
+    collection === 'searchSection' ? searchHandler() : collectionRender(collection)
 }
 
 //Navigation Toggle Function
@@ -200,7 +192,6 @@ const toggleHandler= () => {
 
 //Event Listeners
 homeIcon.addEventListener("click", renderHomePage)
-searchInput.addEventListener('focus', clearSearchInput)
 searchInput.addEventListener('input', searchHandler)
 peopleBtn.addEventListener('click', collectionRenderHandler );
 speciesBtn.addEventListener('click', collectionRenderHandler );
