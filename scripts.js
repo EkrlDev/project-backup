@@ -31,13 +31,13 @@ const bar = document.querySelectorAll("span")
 const searchInput = document.getElementById('search-input');
 
 
-homeIcon.addEventListener("click", () =>{
+const renderHomePage = () => {
     collageContainer.className = 'collage-container';
     const collectionSection = document.querySelector('#collection-container');
     if (collectionSection){collectionSection.className = "collection-container-hidden"};
     isToggled && toggleHandler();
     clearSearchInput();
-})
+};
 
 /* Create Card */
 const createCard = (collectionItem) => {
@@ -199,6 +199,7 @@ const toggleHandler= () => {
 }
 
 //Event Listeners
+homeIcon.addEventListener("click", renderHomePage)
 searchInput.addEventListener('focus', clearSearchInput)
 searchInput.addEventListener('input', searchHandler)
 peopleBtn.addEventListener('click', collectionRenderHandler );
