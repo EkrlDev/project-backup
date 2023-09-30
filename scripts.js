@@ -123,7 +123,6 @@ const collectionRender = (collection) => {
     newSection.className = 'collection-container';
     newSection.setAttribute('data-key', collection)
     newSection.appendChild(goToTopButton);
-    
     if(collection === 'favorites'){
         Object.keys(myFavorites).forEach(key => {
             myFavorites[key].forEach(item => { 
@@ -156,7 +155,7 @@ const collectionRenderHandler = (e) => {
 }
 
 const searchHandler = (e) => {
-    const searchText = e.target.value;
+    const searchText = e.target.value.toLowerCase();
     foundItemsInSearch = [];
     Object.keys(data).map(key => {
         data[key].map(item => {
