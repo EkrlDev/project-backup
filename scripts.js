@@ -29,7 +29,7 @@ const vehiclesBtn = document.querySelector('#vehicles');
 const navVehiclesBtn = document.querySelector('#nav-vehicles');
 const favoritesBtn = document.querySelector('#favorites');
 const navFavoritesBtn = document.querySelector('#nav-favorites');
-const bar = document.querySelectorAll("span")
+const bar = document.querySelectorAll("span");
 const searchInput = document.getElementById('search-input');
 const fullPageImg = document.getElementById('fullPageImg');
 const goToTopButton = document.getElementById('goToTopButton');
@@ -122,7 +122,7 @@ const deleteFromFavorites = (e) => {
         }})
     });
     localStorage.setItem('myFavorites', JSON.stringify(myFavorites));
-    collectionRender(collection)
+    collectionRender(collection);
 }
 
 // Create Card 
@@ -155,7 +155,6 @@ const createCard = (collectionItem) => {
     return newDiv;
 }
 
-
 //Render Collection Section
 const collectionRender = (collection) => {
     collageContainer.className = 'collage-container-hidden';
@@ -170,7 +169,7 @@ const collectionRender = (collection) => {
     const newSection = document.createElement('section');
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
-    newSection.setAttribute('data-key', collection)
+    newSection.setAttribute('data-key', collection);
     if(collection === 'favorites'){
         Object.keys(myFavorites).forEach(key => {
             myFavorites[key].forEach(item => { 
@@ -218,19 +217,19 @@ const searchHandler = (e) => {
 const toggleHandler= () => {
     if(!isToggled) {
         document.querySelector('#toggle-container').className = 'toggle-pushed-container';
-        document.querySelector('#toggle-navigation').className = 'toggle-pushed-navigation'
+        document.querySelector('#toggle-navigation').className = 'toggle-pushed-navigation';
         isToggled = true;
     } else {
         isToggled = false;
-        document.querySelector('#toggle-container').className = 'toggle-container'
-        document.querySelector('#toggle-navigation').className = 'toggle-navigation'
+        document.querySelector('#toggle-container').className = 'toggle-container';
+        document.querySelector('#toggle-navigation').className = 'toggle-navigation';
     }
 }
 
 ////////////// EVENT LISTENERS //////////
-window.addEventListener('scroll', showGoToTopButton)
-homeIcon.addEventListener("click", renderHomePage)
-searchInput.addEventListener('input', searchHandler)
+window.addEventListener('scroll', showGoToTopButton);
+homeIcon.addEventListener("click", renderHomePage);
+searchInput.addEventListener('input', searchHandler);
 peopleBtn.addEventListener('click', collectionRenderHandler );
 speciesBtn.addEventListener('click', collectionRenderHandler );
 starshipsBtn.addEventListener('click', collectionRenderHandler );
