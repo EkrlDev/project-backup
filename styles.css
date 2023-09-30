@@ -126,8 +126,7 @@ main {
     width: 100%;
     max-width: 100%; 
     height:100%;
-    margin: auto;
-    
+    margin: auto;   
 }
 .collage-container-hidden{
     display: none;
@@ -170,7 +169,7 @@ main {
     z-index: 1;
 }
 
-.fullPage {
+.full-page {
     display: none;
     position: fixed;
     width: 100vw;
@@ -220,8 +219,8 @@ main {
 
 .inFav {
     position:absolute;
-    top:10px;
-    right:10px;
+    top: 10px;
+    right: 10px;
     font-size: 24px !important;
     color: #fff;
     cursor: pointer;
@@ -388,8 +387,7 @@ footer a:hover{
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-    }
-        
+    }     
     .toggle-pushed-navigation li{
         margin-top:30px;
         font-family: Roboto;
@@ -399,6 +397,5 @@ footer a:hover{
         list-style: none;
         color:#ffe81f;
         cursor: pointer;
-    }
-        
+    }     
 }
