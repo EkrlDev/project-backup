@@ -141,7 +141,6 @@ main {
     margin-right: auto;
     -webkit-mask-image: radial-gradient(black 30%, transparent 67%);   
     mask-image: radial-gradient(black 30%, transparent 67%);
-    
 }
 
 .collection-container{
@@ -158,7 +157,8 @@ main {
     display: none;
 }
 
-.goToTop {
+#goToTopButton {
+    display: none;
     width: 50px;
     height: 50px;
     top: 80vh;
@@ -173,18 +173,17 @@ main {
 .fullPage {
     display: none;
     position: fixed;
-    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
     top:0;
     margin-left: auto;
     margin-right: auto;
-    width: 100vw;
-    height: 100vh;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     background-color: rgba(0,0,0,0.75);
-    scroll-behavior: unset;
-  }
+    z-index: 9999;
+}
 
 .card{
     position: relative; 
@@ -331,7 +330,6 @@ footer a:hover{
     .toggle-pushed-container .bar:nth-of-type(1) {
 		opacity: 0;
 	}
-
 	.toggle-pushed-container .bar:nth-of-type(2) {
         border-right-color: #e9b8b9;
         transform: rotate(-135deg);

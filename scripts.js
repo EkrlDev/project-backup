@@ -32,6 +32,7 @@ const navFavoritesBtn = document.querySelector('#nav-favorites');
 const bar = document.querySelectorAll("span")
 const searchInput = document.getElementById('search-input');
 const fullPageImg = document.getElementById('fullPageImg');
+const goToTopButton = document.getElementById('goToTopButton');
 
 
 const renderHomePage = () => {
@@ -45,6 +46,14 @@ const renderHomePage = () => {
 const goToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+const showGoToTopButton = () => {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+      goToTopButton.style.display = "block";
+    } else {
+      goToTopButton.style.display = "none";
+    }
+  }
 
 const screenTouchToggle = (e) => {
    if(e.target.id === 'toggle-navigation'){
@@ -109,12 +118,6 @@ const collectionRender = (collection) => {
     if(collectionSection) {
         collectionSection.remove();
     }
-    const newIcon = document.createElement('i');
-    newIcon.className = 'fas fa-angle-double-up';
-    const goToTopButton = document.createElement('button');
-    goToTopButton.appendChild(newIcon);
-    goToTopButton.addEventListener('click', goToTop);
-    goToTopButton.className = 'goToTop';
     const fullPageImg = document.createElement('div');
     fullPageImg.id = 'fullPageImg';
     fullPageImg.addEventListener('click', abortFullPageImg)
@@ -122,7 +125,6 @@ const collectionRender = (collection) => {
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
     newSection.setAttribute('data-key', collection)
-    newSection.appendChild(goToTopButton);
     if(collection === 'favorites'){
         Object.keys(myFavorites).forEach(key => {
             myFavorites[key].forEach(item => { 
@@ -225,6 +227,7 @@ const toggleHandler= () => {
 }
 
 //Event Listeners
+window.addEventListener('scroll', showGoToTopButton)
 homeIcon.addEventListener("click", renderHomePage)
 searchInput.addEventListener('input', searchHandler)
 peopleBtn.addEventListener('click', collectionRenderHandler );
@@ -238,3 +241,4 @@ navSpeciesBtn.addEventListener('click', collectionRenderHandler );
 navStarshipsBtn.addEventListener('click', collectionRenderHandler );
 navVehiclesBtn.addEventListener('click', collectionRenderHandler );
 navFavoritesBtn.addEventListener('click', collectionRenderHandler );
+goToTopButton.addEventListener('click', goToTop);
