@@ -31,6 +31,7 @@ const favoritesBtn = document.querySelector('#favorites');
 const navFavoritesBtn = document.querySelector('#nav-favorites');
 const bar = document.querySelectorAll("span")
 const searchInput = document.getElementById('search-input');
+const fullPageImg = document.getElementById('fullPageImg');
 
 
 const renderHomePage = () => {
@@ -57,7 +58,18 @@ const screenTouchToggle = (e) => {
    }
 }
 
-document.addEventListener('click', screenTouchToggle)
+document.addEventListener('click', screenTouchToggle);
+
+const showImgFullPage = (e)=> {
+        let fullPageImg = e.target.parentElement.parentElement.lastChild;
+        fullPageImg.className = 'fullPage'
+        fullPageImg.style.backgroundImage = 'url(' + e.target.src + ')';
+        fullPageImg.style.display = 'block';
+} 
+
+const abortFullPageImg = (e) => {
+    e.target.style.display = 'none';
+}
 
 /* Create Card */
 const createCard = (collectionItem) => {
@@ -65,8 +77,9 @@ const createCard = (collectionItem) => {
     newDiv.className = 'card';
     const newImg = document.createElement('img');
     newImg.src = collectionItem.src;
-    newImg.alt = `${collectionItem.name} photo`
+    newImg.alt = `${collectionItem.name} photo`;
     newDiv.appendChild(newImg);
+    newImg.addEventListener('click', showImgFullPage);
     const newIcon = document.createElement('i');
     newIcon.className = 'fa fa-heart-o icon';
     newIcon.addEventListener('click', addToFavorites)
@@ -102,11 +115,15 @@ const collectionRender = (collection) => {
     goToTopButton.appendChild(newIcon);
     goToTopButton.addEventListener('click', goToTop);
     goToTopButton.className = 'goToTop';
+    const fullPageImg = document.createElement('div');
+    fullPageImg.id = 'fullPageImg';
+    fullPageImg.addEventListener('click', abortFullPageImg)
     const newSection = document.createElement('section');
     newSection.id = 'collection-container';
     newSection.className = 'collection-container';
     newSection.setAttribute('data-key', collection)
-    newSection.appendChild(goToTopButton)
+    newSection.appendChild(goToTopButton);
+    
     if(collection === 'favorites'){
         Object.keys(myFavorites).forEach(key => {
             myFavorites[key].forEach(item => { 
@@ -125,6 +142,7 @@ const collectionRender = (collection) => {
             newSection.appendChild(newDiv);
         })
     }
+    newSection.appendChild(fullPageImg);
     main.appendChild(newSection);
     isToggled && toggleHandler();
 }

@@ -170,6 +170,22 @@ main {
     z-index: 1;
 }
 
+.fullPage {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    top:0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100vw;
+    height: 100vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0,0,0,0.75);
+    scroll-behavior: unset;
+  }
+
 .card{
     position: relative; 
     width: 300px; 
@@ -348,8 +364,7 @@ footer a:hover{
         left: 0;
         background-color: #1D1E1F;
         z-index: 1;
-        animation: slideIn 0.3s forwards; 
-        border:#e9b8b9 1px solid;  
+        animation: slideIn 0.3s forwards;  
     }
     @keyframes slideIn {
         0% {
@@ -375,7 +390,6 @@ footer a:hover{
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-        border:1px solid #ffe81f;
     }
         
     .toggle-pushed-navigation li{
@@ -387,7 +401,6 @@ footer a:hover{
         list-style: none;
         color:#ffe81f;
         cursor: pointer;
-        border: 1px solid #fff;
     }
         
 }
