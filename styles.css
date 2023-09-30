@@ -126,8 +126,7 @@ main {
     width: 100%;
     max-width: 100%; 
     height:100%;
-    margin: auto;
-    
+    margin: auto;   
 }
 .collage-container-hidden{
     display: none;
@@ -141,7 +140,6 @@ main {
     margin-right: auto;
     -webkit-mask-image: radial-gradient(black 30%, transparent 67%);   
     mask-image: radial-gradient(black 30%, transparent 67%);
-    
 }
 
 .collection-container{
@@ -158,14 +156,32 @@ main {
     display: none;
 }
 
-.goToTop {
+#goToTopButton {
+    display: none;
     width: 50px;
     height: 50px;
     top: 80vh;
     right:3vw;
+    border-radius: 5px;
+    border-color: #ffe81f;
     background-color: #ffe81f;
     position: fixed;
     z-index: 1;
+}
+
+.full-page {
+    display: none;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top:0;
+    margin-left: auto;
+    margin-right: auto;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: rgba(0,0,0,0.75);
+    z-index: 9999;
 }
 
 .card{
@@ -203,8 +219,8 @@ main {
 
 .inFav {
     position:absolute;
-    top:10px;
-    right:10px;
+    top: 10px;
+    right: 10px;
     font-size: 24px !important;
     color: #fff;
     cursor: pointer;
@@ -313,7 +329,6 @@ footer a:hover{
     .toggle-pushed-container .bar:nth-of-type(1) {
 		opacity: 0;
 	}
-
 	.toggle-pushed-container .bar:nth-of-type(2) {
         border-right-color: #e9b8b9;
         transform: rotate(-135deg);
@@ -346,7 +361,7 @@ footer a:hover{
         left: 0;
         background-color: #1D1E1F;
         z-index: 1;
-        animation: slideIn 0.3s forwards;   
+        animation: slideIn 0.3s forwards;  
     }
     @keyframes slideIn {
         0% {
@@ -366,14 +381,13 @@ footer a:hover{
     }
     .toggle-pushed-navigation ul {
         display: flex;
-        width: 100%;
+        width: 200px;
         margin-top: 10px;
         margin-left: 30px;
         flex-direction: column;
         justify-content: center;
         align-items: flex-start;
-    }
-        
+    }     
     .toggle-pushed-navigation li{
         margin-top:30px;
         font-family: Roboto;
@@ -383,6 +397,5 @@ footer a:hover{
         list-style: none;
         color:#ffe81f;
         cursor: pointer;
-    }
-        
+    }     
 }
