@@ -45,6 +45,20 @@ const goToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+const screenTouchToggle = (e) => {
+   if(e.target.id === 'toggle-navigation'){
+   }else if(e.target.id === 'toggle-navigation-list'){
+   }else if(e.target.id === 'toggle-container'){
+   }else if(e.target.id === 'toggle-icon'){
+   }else if(e.target.className === 'bar'){
+   }else if(e.target.className === 'list-item'){
+   }else{
+    isToggled && toggleHandler();
+   }
+}
+
+document.addEventListener('click', screenTouchToggle)
+
 /* Create Card */
 const createCard = (collectionItem) => {
     const newDiv = document.createElement('div');
